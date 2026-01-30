@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zee Malowe Family | Staff Application</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Kantumruy+Pro:wght@300;400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #ffcc00; 
+            --primary: #ffcc00;
             --primary-glow: rgba(255, 204, 0, 0.5);
             --bg-dark: #080808;
             --card-bg: rgba(255, 255, 255, 0.03);
@@ -21,18 +23,15 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background: radial-gradient(circle at center, #252010 0%, #050505 100%);
+            color: #fff;
             font-family: 'Inter', 'Kantumruy Pro', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            background: radial-gradient(circle at center, #252010 0%, #050505 100%);
         }
 
-        /* Ambient glow effect */
         body::before {
             content: "";
             position: absolute;
@@ -49,21 +48,12 @@
         .container {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             padding: 50px 40px;
             border-radius: 24px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
             max-width: 480px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             text-align: center;
-            margin: 20px;
-        }
-
-        .logo-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 25px;
         }
 
         .logo {
@@ -74,12 +64,11 @@
             padding: 5px;
             background: rgba(0,0,0,0.3);
             object-fit: cover;
+            margin-bottom: 20px;
         }
 
         h1 {
             font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -1px;
             margin-bottom: 8px;
             background: linear-gradient(to bottom, #fff 0%, #ffcc00 100%);
             -webkit-background-clip: text;
@@ -90,32 +79,26 @@
             color: #aaa;
             font-size: 0.9rem;
             margin-bottom: 35px;
-            font-weight: 300;
         }
 
         .form-group {
             text-align: left;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
+            margin-bottom: 8px;
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         label span {
             color: var(--primary);
             font-size: 0.75rem;
-            margin-left: 5px;
-            text-transform: none;
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 14px 16px;
             background: var(--input-bg);
@@ -124,14 +107,11 @@
             color: white;
             font-size: 1rem;
             font-family: inherit;
-            transition: all 0.2s ease;
         }
 
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.1);
+        select option {
+            background: #080808;
+            color: white;
         }
 
         button {
@@ -144,37 +124,20 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--primary-glow);
-            filter: brightness(1.1);
         }
 
         button:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
-        }
-
-        ::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="logo-container">
-        <img src="assets/image/2.png" alt="Zee Malowe Logo" class="logo">
-    </div>
+    <img src="assets/image/2.png" alt="Zee Malowe Logo" class="logo">
+
     <h1>Zee Malowe Family</h1>
     <p class="subtitle">Official Staff Application | ពាក្យសុំធ្វើជាភ្នាក់ងារ</p>
 
@@ -185,13 +148,22 @@
         </div>
 
         <div class="form-group">
-            <label>FIVEM SERVER IGN <span>(ឈ្មោះក្នុងហ្គេម)</span></label>
+            <label>FIVEM Server IGN <span>(ឈ្មោះក្នុងហ្គេម)</span></label>
             <input type="text" id="minecraftIGN" placeholder="In-game name" required>
         </div>
 
         <div class="form-group">
             <label>Age <span>(អាយុ)</span></label>
             <input type="number" id="age" min="13" placeholder="13+" required>
+        </div>
+
+        <div class="form-group">
+            <label>Gender <span>(ភេទ)</span></label>
+            <select id="gender" required>
+                <option value="" disabled selected>Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -204,60 +176,52 @@
 </div>
 
 <script>
-    document.getElementById('applicationForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const btn = document.getElementById('submitBtn');
-        const discordName = document.getElementById('discordName').value;
-        const minecraftIGN = document.getElementById('minecraftIGN').value;
-        const age = document.getElementById('age').value;
-        const reason = document.getElementById('reason').value;
+document.getElementById('applicationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        btn.innerText = "Sending / កំពុងផ្ញើ...";
-        btn.disabled = true;
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "Sending...";
 
-        const webhookURL = "https://discord.com/api/webhooks/1464308140173426821/K1cCPELsUm3C0OBuPyMoUZS8c54gVYlIaM-vSFG06Fg0Z7JOZud1gYjCXKd_r5FZqTUH"; 
+    const data = {
+        discord: document.getElementById('discordName').value,
+        ign: document.getElementById('minecraftIGN').value,
+        age: document.getElementById('age').value,
+        gender: document.getElementById('gender').value,
+        reason: document.getElementById('reason').value
+    };
 
-        const contents = {
-            "content": "@everyone 📢 **New Member Application Received!**",
-            "embeds": [{
-                "title": "👑 Zee Malowe Family Member Recruitment",
-                "description": "A new applicant has submitted their details through the web portal.",
-                "color": 16763904, // Gold hex: #FFCC00
-                "fields": [
-                    { "name": "👤 Discord", "value": "`" + discordName + "`", "inline": true },
-                    { "name": "🎮 FiveM Server IGN", "value": "`" + minecraftIGN + "`", "inline": true },
-                    { "name": "🎂 Age", "value": "`" + age + "`", "inline": true },
-                    { "name": "📝 Application Message", "value": "```" + reason + "```" }
+    const webhookURL = "PUT_YOUR_DISCORD_WEBHOOK_HERE";
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            content: "@everyone 📢 **New Staff Application**",
+            embeds: [{
+                title: "👑 Zee Malowe Family Application",
+                color: 16763904,
+                fields: [
+                    { name: "Discord", value: data.discord, inline: true },
+                    { name: "IGN", value: data.ign, inline: true },
+                    { name: "Age", value: data.age, inline: true },
+                    { name: "Gender", value: data.gender, inline: true },
+                    { name: "Message", value: "```" + data.reason + "```" }
                 ],
-                "footer": { "text": "Zee Malowe Family Management System" },
-                "timestamp": new Date()
+                timestamp: new Date()
             }]
-        };
-
-        fetch(webhookURL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(contents)
         })
-        .then(response => {
-            if (response.ok) {
-                alert("Application Sent Successfully! សូមអរគុណ ក្រុមការងារនឹងទាក់ទងទៅវិញឆាប់ៗ!");
-                document.getElementById('applicationForm').reset();
-            } else {
-                throw new Error('Failed to send');
-            }
-        })
-        .catch(() => {
-            alert("Error sending application. Please check your internet or try again later.");
-        })
-        .finally(() => {
-            btn.innerText = "Send Application / ផ្ញើពាក្យសុំ";
-            btn.disabled = false;
-        });
+    }).then(() => {
+        alert("Application sent successfully!");
+        document.getElementById('applicationForm').reset();
+    }).catch(() => {
+        alert("Failed to send application.");
+    }).finally(() => {
+        btn.disabled = false;
+        btn.innerText = "Send Application / ផ្ញើពាក្យសុំ";
     });
+});
 </script>
 
 </body>
-
 </html>
